@@ -17,19 +17,19 @@ public class CollectionCreateClass {
     public static final String getPlatformFirstPartURL = "https://api.igdb.com/v4/platforms/";
     public static final String getPlatformSecondPartURL = "?&fields=name";
 
-    public static Map<Date, String> CreateReleaseDatesCollection(JSONArray jsonArray, String accessToken) {
+    public static Map<Date, ArrayList<String>> CreateReleaseDatesCollection(JSONArray jsonArray, String accessToken) {
 
         if (jsonArray.isEmpty()) return null;
-        Map<Date, String> releaseDates = new HashMap<>();
-        String platforms = "";
+        Map<Date, ArrayList<String>> releaseDates = new HashMap<>();
+
         for (int i = 0; i <jsonArray.length(); i++) {
 
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             JSONArray platform = new JSONArray(HttpRequestClass.sendGetRequestToIGDB(getPlatformFirstPartURL + jsonObject.getLong("platform") + getPlatformSecondPartURL, accessToken).body());
 
             Date date = new Date((long)jsonObject.getLong("date")*1000);
-            platforms = platforms + "\n" + platform.getJSONObject(0).getString("name");
-            if (!releaseDates.containsKey(date)) releaseDates.put(date, platforms);
+            if (!releaseDates.containsKey(date)) releaseDates.put(date, new ArrayList<>());
+            releaseDates.get(date).add(platform.getJSONObject(0).getString("name"));
         }
 
         return releaseDates;
