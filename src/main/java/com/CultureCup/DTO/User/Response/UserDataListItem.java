@@ -4,25 +4,21 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Collection;
+import java.sql.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserData {
+public class UserDataListItem {
 
     private Long userId;
 
     private String username;
 
-    private String firstname;
-
-    private String lastname;
-
     private String email;
 
-    private Collection<? extends GrantedAuthority> roles;
+    private List<String> roles;
 }
