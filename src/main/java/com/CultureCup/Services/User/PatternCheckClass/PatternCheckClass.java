@@ -17,7 +17,7 @@ public class PatternCheckClass {
         Matcher matcher = pattern.matcher(username);
         if (!matcher.matches()) {
             logger.error("Entered username is incorrect: \"" + username + "\"" );
-            throw new IncorrectDataInput("Podana nazwa użytkownika jest błędna!");
+            throw new IncorrectDataInput("Podana nazwa użytkownika jest nie prawidłowa!");
         }
     }
 
@@ -27,7 +27,7 @@ public class PatternCheckClass {
         Matcher matcher = pattern.matcher(email);
         if (!matcher.matches()) {
             logger.error("Entered e-mail is incorrect: \"" + email + "\"");
-            throw new IncorrectDataInput("Podany e-mail jest błędny!");
+            throw new IncorrectDataInput("Podany e-mail jest nie prawidłowy!");
         }
     }
 
@@ -38,7 +38,7 @@ public class PatternCheckClass {
 
         if (!matcher.matches()) {
             logger.error("Entered password is incorrect: \"" + password + "\"");
-            throw new IncorrectDataInput("Podane hasło jest błędne!");
+            throw new IncorrectDataInput("Podane hasło jest nie prawidłowe!");
         }
     }
 }
