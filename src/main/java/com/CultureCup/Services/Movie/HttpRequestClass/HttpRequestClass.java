@@ -1,6 +1,7 @@
 package com.CultureCup.Services.Movie.HttpRequestClass;
 
 import com.CultureCup.Exceptions.RequestErrorException;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,7 @@ public class HttpRequestClass {
 
     static Logger logger = LoggerFactory.getLogger(HttpRequestClass.class);
 
-    public static HttpResponse<String> sendRequest(String path) {
+    public static HttpResponse<String> sendRequestToTMDB(String path) {
 
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
