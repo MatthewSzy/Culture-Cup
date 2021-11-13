@@ -28,7 +28,7 @@ public class GameData {
 
     private String backdropImageURL;
 
-    private Map<Date, String> releaseDates;
+    private Map<Date, ArrayList<String>> releaseDates;
 
     private Map<String, String> expansions;
 
