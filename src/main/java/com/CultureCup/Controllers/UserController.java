@@ -1,8 +1,10 @@
 package com.CultureCup.Controllers;
 
+import com.CultureCup.DTO.Game.GameListItem;
 import com.CultureCup.DTO.MessageResponse;
 import com.CultureCup.DTO.Movie.MovieListItem;
 import com.CultureCup.DTO.User.Request.*;
+import com.CultureCup.DTO.User.Response.UserDataListItem;
 import com.CultureCup.DTO.User.Response.UserImageData;
 import com.CultureCup.DTO.User.Response.UserTokenData;
 import com.CultureCup.Services.User.UserService;
@@ -38,10 +40,10 @@ public class UserController {
 
     @PutMapping("/update")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<MessageResponse> userUpdate(@RequestBody UpdateData updateData) {
+    public ResponseEntity<UserTokenData> userUpdate(@RequestBody UpdateData updateData) {
 
-        MessageResponse messageResponse = userService.userUpdate(updateData);
-        return ResponseEntity.ok(messageResponse);
+        UserTokenData userTokenData = userService.userUpdate(updateData);
+        return ResponseEntity.ok(userTokenData);
     }
 
     @DeleteMapping("/delete")
@@ -68,6 +70,30 @@ public class UserController {
         return ResponseEntity.ok(userImageData);
     }
 
+    @GetMapping("/get/usersList")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<UserDataListItem>> getListOfUsers() {
+
+        List<UserDataListItem> response = userService.getListOfUsers();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/add/admin/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<MessageResponse> addAdminRole(@PathVariable(name = "id") Long userId) {
+
+        MessageResponse response = userService.addAdminRole(userId);
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("delete/admin/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<MessageResponse> deleteAdminRole(@PathVariable(name = "id") Long userId) {
+
+        MessageResponse response = userService.deleteAdminRole(userId);
+        return ResponseEntity.ok(response);
+    }
+
     @PutMapping("/add/toWatch")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<MessageResponse> userAddMovieToWatch(@RequestBody AddMovieToWatchData addMovieToWatchData) {
@@ -84,7 +110,7 @@ public class UserController {
         return ResponseEntity.ok(messageResponse);
     }
 
-    @PutMapping("/add/favorite")
+    @PutMapping("/add/favoriteMovie")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<MessageResponse> userAddMovieToFavorite(@RequestBody AddMovieToFavoriteData addMovieToFavoriteData) {
 
@@ -108,7 +134,7 @@ public class UserController {
         return ResponseEntity.ok(movieListItem);
     }
 
-    @GetMapping("/get/favorite/{id}")
+    @GetMapping("/get/favoriteMovie/{id}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<MovieListItem>> userGetFavoriteMovies(@PathVariable(name = "id") Long userId) {
 
@@ -116,11 +142,67 @@ public class UserController {
         return ResponseEntity.ok(movieListItem);
     }
 
-    @GetMapping("/get/info")
+    @PostMapping("/get/movieInfo")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<Boolean>> userGetMoviesInfo(@RequestBody CheckUserMoviesInfoData checkUserMoviesInfoData) {
 
         List<Boolean> moviesInfo = userService.userGetMoviesInfo(checkUserMoviesInfoData);
         return ResponseEntity.ok(moviesInfo);
+    }
+
+    @PutMapping("/add/toPlay")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<MessageResponse> userAddGameToPlay(@RequestBody AddGameToPlayData addGameToPlayData) {
+
+        MessageResponse messageResponse = userService.userAddGameToPlay(addGameToPlayData);
+        return ResponseEntity.ok(messageResponse);
+    }
+
+    @PutMapping("/add/played")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<MessageResponse> userAddGameToPlayed(@RequestBody AddGameToPlayedData addGameToPlayedData) {
+
+        MessageResponse messageResponse = userService.userAddGameToPlayed(addGameToPlayedData);
+        return ResponseEntity.ok(messageResponse);
+    }
+
+    @PutMapping("/add/favoriteGame")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<MessageResponse> userAddGameToFavorite(@RequestBody AddGameToFavoriteData addGameToFavoriteData) {
+
+        MessageResponse messageResponse = userService.userAddGameToFavorite(addGameToFavoriteData);
+        return ResponseEntity.ok(messageResponse);
+    }
+
+    @GetMapping("/get/toPlay/{id}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<GameListItem>> userGetToPlayGames(@PathVariable(name = "id") Long userId) {
+
+        List<GameListItem> gameListItem = userService.userGetToPlayGames(userId);
+        return ResponseEntity.ok(gameListItem);
+    }
+
+    @GetMapping("/get/played/{id}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<GameListItem>> userGetPlayedGames(@PathVariable(name = "id") Long userId) {
+
+        List<GameListItem> gameListItem = userService.userGetPlayedGames(userId);
+        return ResponseEntity.ok(gameListItem);
+    }
+
+    @GetMapping("/get/favoriteGame/{id}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<GameListItem>> userGetFavoriteGames(@PathVariable(name = "id") Long userId) {
+
+        List<GameListItem> gameListItem = userService.userGetFavoriteGames(userId);
+        return ResponseEntity.ok(gameListItem);
+    }
+
+    @PostMapping("/get/gameInfo")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<List<Boolean>> userGetGamesInfo(@RequestBody CheckUserGamesInfoData checkUserGamesInfoData) {
+
+        List<Boolean> gamesInfo = userService.userGetGamesInfo(checkUserGamesInfoData);
+        return ResponseEntity.ok(gamesInfo);
     }
 }
