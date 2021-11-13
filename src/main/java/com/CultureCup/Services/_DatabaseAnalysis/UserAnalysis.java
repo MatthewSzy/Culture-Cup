@@ -7,6 +7,7 @@ import com.CultureCup.Repositories.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserAnalysis {
@@ -22,6 +23,17 @@ public class UserAnalysis {
         }
 
         return user.get();
+    }
+
+    public static List<User> findAllUsers(UserRepository userRepository) {
+
+        List<User> users = userRepository.findAll();
+        if (users.isEmpty()) {
+            logger.error("Unable to download user list, the list is empty");
+            throw new UserNotFoundException("Nie udało się pobrać listy użytkowników, lista jest pusta!");
+        }
+
+        return users;
     }
 
     public static void existsUserByUsername(UserRepository userRepository, String username) {
