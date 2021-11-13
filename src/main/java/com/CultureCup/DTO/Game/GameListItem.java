@@ -1,25 +1,26 @@
-package com.CultureCup.DTO.Movie;
+package com.CultureCup.DTO.Game;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.util.Date;
+
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MovieListItem {
+public class GameListItem {
 
-    private Long movieId;
+    private Long gameId;
 
     private String title;
 
     private Date releaseDate;
 
-    private String posterImage;
+    private String posterImageURL;
 
     private Double voteAverage;
 

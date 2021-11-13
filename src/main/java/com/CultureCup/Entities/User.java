@@ -42,6 +42,15 @@ public class User {
         @ElementCollection
         private Map<Long, Double> favoriteMovies = new HashMap<>();
 
+        @ElementCollection
+        private Set<Long> gamesToPlay = new HashSet<>();
+
+        @ElementCollection
+        private Map<Long, Double> gamesPlayed = new HashMap<>();
+
+        @ElementCollection
+        private Map<Long, Double> favoriteGames = new HashMap<>();
+
         @ManyToMany(fetch = FetchType.LAZY)
         @JoinTable( name = "user_roles",
                 joinColumns = @JoinColumn(name = "user_id"),

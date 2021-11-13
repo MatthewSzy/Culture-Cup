@@ -25,9 +25,26 @@ public class RolesSetCreateClass {
 
         roles.forEach(role -> {
             if ("admin".equals(role)) rolesSet.add(RoleAnalysis.findRoleByName(roleRepository, RoleEnum.ROLE_ADMIN));
-            else if("user".equals(role)) rolesSet.add(RoleAnalysis.findRoleByName(roleRepository, RoleEnum.ROLE_USER));
+            else if ("user".equals(role)) rolesSet.add(RoleAnalysis.findRoleByName(roleRepository, RoleEnum.ROLE_USER));
         });
 
         return rolesSet;
+    }
+
+    public static Set<Role> rolesSetWithAdmin(RoleRepository roleRepository) {
+
+        Set<Role> newRolesSet = new HashSet<>();
+        newRolesSet.add(RoleAnalysis.findRoleByName(roleRepository, RoleEnum.ROLE_USER));
+        newRolesSet.add(RoleAnalysis.findRoleByName(roleRepository, RoleEnum.ROLE_ADMIN));
+
+        return newRolesSet;
+    }
+
+    public static Set<Role> rolesSetWithoutAdmin(RoleRepository roleRepository) {
+
+        Set<Role> newRolesSet = new HashSet<>();
+        newRolesSet.add(RoleAnalysis.findRoleByName(roleRepository, RoleEnum.ROLE_USER));
+
+        return newRolesSet;
     }
 }

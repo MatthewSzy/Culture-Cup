@@ -1,4 +1,4 @@
-package com.CultureCup.Services.Movie.HttpRequestClass;
+package com.CultureCup.Services.Game.AccessTokenRequestClass;
 
 import com.CultureCup.Exceptions.RequestErrorException;
 import org.json.JSONObject;
@@ -11,21 +11,22 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class HttpRequestClass {
+public class AccessTokenRequestClass {
 
-    static Logger logger = LoggerFactory.getLogger(HttpRequestClass.class);
+    static Logger logger = LoggerFactory.getLogger(AccessTokenRequestClass.class);
 
-    public static HttpResponse<String> sendRequestToTMDB(String path) {
+    public static String AccessTokenRequest(String path) {
 
         try {
             HttpClient httpClient = HttpClient.newHttpClient();
             HttpRequest httpRequest = HttpRequest.newBuilder()
                     .GET()
                     .header("accept", "application/json")
-                    .uri(URI.create(path))
+                    .uri(URI.create("https://id.twitch.tv/oauth2/token?client_id=o7e5emy3bv5krc8795n6di1o2rm1ce&client_secret=kumwkncx39ee7m4stywpmuizaot80v&grant_type=client_credentials"))
                     .build();
 
-            return httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            JSONObject tokenRequest = new JSONObject(httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString()).body());
+            return tokenRequest.getString("access_token");
 
         } catch (IOException | InterruptedException e) {
             logger.error("The query to the movie database could not be completed");

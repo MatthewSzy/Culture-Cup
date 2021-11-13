@@ -15,7 +15,7 @@ public class CastListItem {
 
     private String name;
 
-    private byte[] profileImage;
+    private String profileImage;
 
     private String character;
 }

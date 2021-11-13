@@ -24,20 +24,17 @@ public class CreditsService {
 
     public List<CastListItem> getMovieCast(Long movieId) {
 
-        JSONObject jsonObject = new JSONObject(HttpRequestClass.sendRequest(getMovieCreditsFirstPartURL + movieId + getMovieCreditsSecondPartURL).body());
+        JSONObject jsonObject = new JSONObject(HttpRequestClass.sendRequestToTMDB(getMovieCreditsFirstPartURL + movieId + getMovieCreditsSecondPartURL).body());
         JSONArray jsonArray = new JSONArray(jsonObject.getJSONArray("cast"));
 
         List<CastListItem> castListItems = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
 
             JSONObject actor = jsonArray.getJSONObject(i);
-
-            byte[] profileImage = null;
-            if (!actor.isNull("profile_path")) profileImage = ImageDownloadClass.getImage(getProfileImageURL + actor.getString("profile_path"));
             castListItems.add(CastListItem.builder()
                     .actorId(actor.getLong("id"))
                     .name(actor.getString("name"))
-                    .profileImage(profileImage)
+                    .profileImage(actor.isNull("profile_path")? null : actor.getString("profile_path"))
                     .character(actor.getString("character"))
                     .build());
         }
@@ -47,19 +44,17 @@ public class CreditsService {
 
     public List<CrewListItem> getMovieCrew(Long movieId) {
 
-        JSONObject jsonObject = new JSONObject(HttpRequestClass.sendRequest(getMovieCreditsFirstPartURL + movieId + getMovieCreditsSecondPartURL).body());
+        JSONObject jsonObject = new JSONObject(HttpRequestClass.sendRequestToTMDB(getMovieCreditsFirstPartURL + movieId + getMovieCreditsSecondPartURL).body());
         JSONArray jsonArray = new JSONArray(jsonObject.getJSONArray("crew"));
 
         List<CrewListItem> crewListItems = new ArrayList<>();
         for (int i = 0; i <jsonArray.length(); i++) {
 
             JSONObject person = jsonArray.getJSONObject(i);
-            byte[] profileImage = null;
-            if (!person.isNull("profile_path")) profileImage = ImageDownloadClass.getImage(getProfileImageURL + person.getString("profile_path"));
             crewListItems.add(CrewListItem.builder()
                     .personId(person.getLong("id"))
                     .name(person.getString("name"))
-                    .profileImage(profileImage)
+                    .profileImage(person.isNull("profile_path")? null : person.getString("profile_path"))
                     .department(person.getString("department"))
                     .build());
         }
@@ -69,7 +64,7 @@ public class CreditsService {
 
     public PersonData getPerson(Long personId) {
 
-        JSONObject jsonObject = new JSONObject(HttpRequestClass.sendRequest(getPersonFirstPartURL + personId + getPersonSecondPartURL).body());
+        JSONObject jsonObject = new JSONObject(HttpRequestClass.sendRequestToTMDB(getPersonFirstPartURL + personId + getPersonSecondPartURL).body());
 
         byte[] profileImage = ImageDownloadClass.getImage(getProfileImageURL + jsonObject.getString("profile_path"));
 

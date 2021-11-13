@@ -11,20 +11,18 @@ import java.sql.Date;
 
 public class ObjectCreateClass {
 
-    static Logger logger = LoggerFactory.getLogger(CollectionCreateClass.class);
+    static Logger logger = LoggerFactory.getLogger(ObjectCreateClass.class);
 
     public static final String getMovieImageURL = "http://image.tmdb.org/t/p/original";
 
     public static MovieListItem createMovieListItem(JSONObject movie) {
-
-        byte[] posterPath = ImageDownloadClass.getImage(getMovieImageURL + movie.getString("poster_path"));
         return MovieListItem.builder()
                 .movieId(movie.getLong("id"))
                 .title(movie.getString("title"))
                 .releaseDate(Date.valueOf(movie.getString("release_date")))
-                .posterImage(posterPath)
-                .voteAverage(0.0)
-                .voteCount(0L)
+                .posterImage(movie.getString("poster_path"))
+                .voteAverage(movie.getDouble("vote_average"))
+                .voteCount(movie.getLong("vote_count"))
                 .build();
     }
 }
