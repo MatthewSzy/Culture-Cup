@@ -21,14 +21,13 @@ public class CollectionCreateClass {
 
         if (jsonArray.isEmpty()) return null;
         Map<Date, String> releaseDates = new HashMap<>();
-
+        String platforms = "";
         for (int i = 0; i <jsonArray.length(); i++) {
 
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             JSONArray platform = new JSONArray(HttpRequestClass.sendGetRequestToIGDB(getPlatformFirstPartURL + jsonObject.getLong("platform") + getPlatformSecondPartURL, accessToken).body());
 
             Date date = new Date((long)jsonObject.getLong("date")*1000);
-            String platforms = "";
             platforms = platforms + "\n" + platform.getJSONObject(0).getString("name");
             if (!releaseDates.containsKey(date)) releaseDates.put(date, platforms);
         }
