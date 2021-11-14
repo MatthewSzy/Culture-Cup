@@ -87,7 +87,7 @@ public class GameService {
 
     public List<GameListItem> searchGames(String query) {
 
-        JSONArray jsonArray = new JSONArray(HttpRequestClass.sendPostRequestToIGDB(getGameFirstPartURL, "fields cover.url,name,rating,rating_count,release_dates.date; where id > 1000 & cover != null & release_dates != null & release_dates.date != null; search \"zelda\";" + ";", accessToken).body());
+        JSONArray jsonArray = new JSONArray(HttpRequestClass.sendPostRequestToIGDB(getGameFirstPartURL, "fields cover.url,name,rating,rating_count,release_dates.date; where id > 1000 & cover != null & release_dates != null & release_dates.date != null; search \"" + query + "\";" + ";", accessToken).body());
 
         List<GameListItem> gameListItem = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) gameListItem.add(ObjectCreateClass.CreateGameListItem(jsonArray.getJSONObject(i)));
