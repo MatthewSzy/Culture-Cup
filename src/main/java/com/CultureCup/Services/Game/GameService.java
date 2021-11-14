@@ -20,7 +20,7 @@ import java.util.List;
 public class GameService {
 
     public static final String getGameFirstPartURL = "https://api.igdb.com/v4/games/";
-    public static final String getGameSecondPartURL = "?&fields=age_ratings.rating,category,cover.url,expansions.id,franchises.name,game_engines.name,game_modes.name,genres.name,name,player_perspectives.name,platforms.name,release_dates.*,status,screenshots.url,storyline,themes.name,total_rating,total_rating_count";
+    public static final String getGameSecondPartURL = "?&fields=age_ratings.rating,category,cover.url,expansions.id,franchises.name,game_engines.name,game_modes.name,genres.name,name,player_perspectives.name,platforms.name,release_dates.*,status,screenshots.url,storyline,summary,themes.name,total_rating,total_rating_count";
 
     public String accessToken = "fgkdv5nm5d8d7dga2z2ed3p4zcdltn";
 
@@ -33,7 +33,7 @@ public class GameService {
         return GameData.builder()
                 .gameId(jsonObject.getLong("id"))
                 .title(jsonObject.getString("name"))
-                .overview(jsonObject.isNull("storyline")? null : jsonObject.getString("storyline"))
+                .overview(jsonObject.isNull("summary")? null : jsonObject.getString("summary"))
                 .perspective(jsonObject.isNull("player_perspective")? null : jsonObject.getJSONArray("player_perspectives").getJSONObject(0).getString("name"))
                 .posterImageURL(jsonObject.isNull("cover")? null : ObjectCreateClass.changeImageTypeToCoverBig(jsonObject.getJSONObject("cover").getString("url")))
                 .backdropImageURL(jsonObject.isNull("screenshots")? null : ObjectCreateClass.changeImageTypeToOriginal(jsonObject.getJSONArray("screenshots").getJSONObject(0).getString("url")))
@@ -43,7 +43,7 @@ public class GameService {
                 .franchises(jsonObject.isNull("franchises")? null : jsonObject.getJSONArray("franchises").getJSONObject(0).getString("name"))
                 .engine(jsonObject.isNull("game_engines")? null : jsonObject.getJSONArray("game_engines").getJSONObject(0).getString("name"))
                 .mods(jsonObject.isNull("game_modes")? null : jsonObject.getJSONArray("game_modes").getJSONObject(0).getString("name"))
-                .ageRating(jsonObject.getJSONArray("age_ratings").getJSONObject(1).isNull("rating")? null : jsonObject.getJSONArray("age_ratings").getJSONObject(1).getInt("rating"))
+                .ageRating((jsonObject.isNull("age_ratings") || jsonObject.getJSONArray("age_ratings").getJSONObject(1).isNull("rating"))? null : jsonObject.getJSONArray("age_ratings").getJSONObject(1).getInt("rating"))
                 .voteAverage(jsonObject.isNull("total_rating")? null : jsonObject.getDouble("total_rating")/10)
                 .voteCount(jsonObject.isNull("total_rating_count")? null : jsonObject.getLong("total_rating_count"))
                 .categories(jsonObject.isNull("genres")? null : CollectionCreateClass.CreateCategoriesCollection(jsonObject.getJSONArray("genres"), jsonObject.getJSONArray("themes")))
