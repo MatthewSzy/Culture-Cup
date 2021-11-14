@@ -1,6 +1,7 @@
 package com.CultureCup.Services.Game.CollectionCreateClass;
 
 import com.CultureCup.Services.Game.HttpRequestClass.HttpRequestClass;
+import com.CultureCup.Services.Game.ObjectCreateClass.ObjectCreateClass;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -46,7 +47,7 @@ public class CollectionCreateClass {
             JSONArray expansion = new JSONArray(HttpRequestClass.sendGetRequestToIGDB(getExpensionsFirstPartURL + jsonObject.getLong("id") + getExpensionsSecondPartURL, accessToken).body());
             jsonObject = expansion.getJSONObject(0);
 
-            expansions.put(jsonObject.getString("name"), jsonObject.getJSONObject("cover").getString("url"));
+            expansions.put(jsonObject.getString("name"), ObjectCreateClass.changeImageTypeToCoverBig(jsonObject.getJSONObject("cover").getString("url")));
         }
 
         return expansions;
