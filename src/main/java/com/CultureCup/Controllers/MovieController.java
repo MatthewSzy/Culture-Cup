@@ -1,5 +1,6 @@
 package com.CultureCup.Controllers;
 
+import com.CultureCup.DTO.Game.GameListItem;
 import com.CultureCup.DTO.Movie.MovieData;
 import com.CultureCup.DTO.Movie.MovieListItem;
 import com.CultureCup.Services.Movie.MovieService;
@@ -49,6 +50,13 @@ public class MovieController {
     public ResponseEntity<List<MovieListItem>> getUpcomingMovies(@PathVariable(name = "page") Long page) {
 
         List<MovieListItem> movieListData = movieService.getUpcomingMovies(page);
+        return ResponseEntity.ok(movieListData);
+    }
+
+    @GetMapping("/search/{query}")
+    public ResponseEntity<List<MovieListItem>> searchMovies(@PathVariable(name = "query") String query) {
+
+        List<MovieListItem> movieListData = movieService.searchMovies(query);
         return ResponseEntity.ok(movieListData);
     }
 }

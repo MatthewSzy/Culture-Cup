@@ -2,6 +2,7 @@ package com.CultureCup.Services.Game;
 
 import com.CultureCup.DTO.Game.GameData;
 import com.CultureCup.DTO.Game.GameListItem;
+import com.CultureCup.DTO.Movie.MovieListItem;
 import com.CultureCup.Services.Game.AccessTokenRequestClass.AccessTokenRequestClass;
 import com.CultureCup.Services.Game.CollectionCreateClass.CollectionCreateClass;
 import com.CultureCup.Services.Game.HttpRequestClass.HttpRequestClass;
@@ -77,6 +78,16 @@ public class GameService {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MONTH, 1);
         JSONArray jsonArray = new JSONArray(HttpRequestClass.sendPostRequestToIGDB(getGameFirstPartURL, "fields cover.url,name,rating,rating_count,release_dates.date; sort rating desc; where cover != null & release_dates != null & release_dates.date != null & release_dates.date > " + actualDate.getTime() + " & release_dates.date > " + calendar.getTimeInMillis() + "; limit 20; offset " + (page-1)*20 + ";", accessToken).body());
+
+        List<GameListItem> gameListItem = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) gameListItem.add(ObjectCreateClass.CreateGameListItem(jsonArray.getJSONObject(i)));
+
+        return gameListItem;
+    }
+
+    public List<GameListItem> searchGames(String query) {
+
+        JSONArray jsonArray = new JSONArray(HttpRequestClass.sendPostRequestToIGDB(getGameFirstPartURL, "fields cover.url,name,rating,rating_count,release_dates.date; where id > 1000 & cover != null & release_dates != null & release_dates.date != null; search \"zelda\";" + ";", accessToken).body());
 
         List<GameListItem> gameListItem = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) gameListItem.add(ObjectCreateClass.CreateGameListItem(jsonArray.getJSONObject(i)));

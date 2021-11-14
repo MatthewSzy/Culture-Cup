@@ -22,6 +22,8 @@ public class MovieService {
     public static final String getPopularMoviesURL = "https://api.themoviedb.org/3/movie/popular?api_key=6728e1ab041b59d1f357590bff4384f5&language=pl-PL&page=";
     public static final String getTopMoviesURL = "https://api.themoviedb.org/3/movie/top_rated?api_key=6728e1ab041b59d1f357590bff4384f5&language=pl-PL&page=";
     public static final String getUpcomingMoviesURL = "https://api.themoviedb.org/3/movie/upcoming?api_key=6728e1ab041b59d1f357590bff4384f5&language=pl-PL&page=";
+    public static final String getSearchMoviesFirstPartURL = "https://api.themoviedb.org/3/search/movie?api_key=6728e1ab041b59d1f357590bff4384f5&language=pl-PL&query=";
+    public static final String getSearchMoviesSecondPartURL = "&page=1";
 
     public MovieData getMovie(Long movieId) {
 
@@ -90,6 +92,17 @@ public class MovieService {
             if (!movie.has("poster_path") || movie.isNull("poster_path")) continue;
             movieListData.add(ObjectCreateClass.createMovieListItem(movie));
         }
+
+        return movieListData;
+    }
+
+    public List<MovieListItem> searchMovies(String query) {
+
+        JSONObject jsonObject = new JSONObject(HttpRequestClass.sendRequestToTMDB(getSearchMoviesFirstPartURL + query + getSearchMoviesSecondPartURL).body());
+        JSONArray jsonArray = new JSONArray(jsonObject.getJSONArray("results"));
+
+        List<MovieListItem> movieListData = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) movieListData.add(ObjectCreateClass.createMovieListItem(jsonArray.getJSONObject(i)));
 
         return movieListData;
     }

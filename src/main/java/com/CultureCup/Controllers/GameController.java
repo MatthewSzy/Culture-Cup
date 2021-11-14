@@ -49,4 +49,11 @@ public class GameController {
         List<GameListItem> gameListItem = gameService.getUpcomingGames(page);
         return ResponseEntity.ok(gameListItem);
     }
+
+    @GetMapping("/search/{query}")
+    public ResponseEntity<List<GameListItem>> searchGames(@PathVariable(name = "query") String query) {
+
+        List<GameListItem> gameListItem = gameService.searchGames(query);
+        return ResponseEntity.ok(gameListItem);
+    }
 }
