@@ -33,7 +33,7 @@ public class GameService {
         return GameData.builder()
                 .gameId(jsonObject.getLong("id"))
                 .title(jsonObject.getString("name"))
-                .overview(jsonObject.getString("storyline"))
+                .overview(jsonObject.isNull("storyline")? null : jsonObject.getString("storyline"))
                 .perspective((jsonObject.getJSONArray("player_perspectives")).getJSONObject(0).getString("name"))
                 .posterImageURL(ObjectCreateClass.changeImageTypeToCoverBig(jsonObject.getJSONObject("cover").getString("url")))
                 .backdropImageURL(ObjectCreateClass.changeImageTypeToOriginal(jsonObject.getJSONArray("screenshots").getJSONObject(0).getString("url")))
