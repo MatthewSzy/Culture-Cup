@@ -102,7 +102,7 @@ public class MovieService {
         JSONArray jsonArray = new JSONArray(jsonObject.getJSONArray("results"));
 
         List<MovieListItem> movieListData = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) movieListData.add(ObjectCreateClass.createMovieListItem(jsonArray.getJSONObject(i)));
+        for (int i = 0; i < 10; i++) movieListData.add(ObjectCreateClass.createMovieListItem(jsonArray.getJSONObject(i)));
 
         return movieListData;
     }
