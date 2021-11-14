@@ -41,7 +41,7 @@ public class GameService {
                 .expansions(jsonObject.isNull("expansions")? null : CollectionCreateClass.CreateExpansionsCollection(jsonObject.getJSONArray("expansions"), accessToken))
                 .platforms(CollectionCreateClass.CreatePlatformsCollection(jsonObject.getJSONArray("platforms")))
                 .franchises(jsonObject.isNull("franchises")? null : jsonObject.getJSONArray("franchises").getJSONObject(0).getString("name"))
-                .engine(jsonObject.getJSONArray("game_engines").getJSONObject(0).getString("name"))
+                .engine(jsonObject.isNull("game_engines")? null : jsonObject.getJSONArray("game_engines").getJSONObject(0).getString("name"))
                 .mods(jsonObject.getJSONArray("game_modes").getJSONObject(0).getString("name"))
                 .ageRating(jsonObject.getJSONArray("age_ratings").getJSONObject(1).getInt("rating"))
                 .voteAverage(jsonObject.getDouble("total_rating")/10)
