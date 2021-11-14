@@ -69,4 +69,15 @@ public class CollectionCreateClass {
 
         return categories;
     }
+
+    public static int GetAgeRating(JSONArray jsonArray) {
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            if (jsonArray.getJSONObject(i).getInt("category") == 2) {
+                return jsonArray.getJSONObject(i).getInt("rating");
+            }
+        }
+
+        return -1;
+    }
 }
