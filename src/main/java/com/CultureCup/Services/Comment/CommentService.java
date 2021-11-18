@@ -1,9 +1,6 @@
 package com.CultureCup.Services.Comment;
 
-import com.CultureCup.DTO.Comments.Request.AddCommentRequest;
-import com.CultureCup.DTO.Comments.Request.AddLikeRequest;
-import com.CultureCup.DTO.Comments.Request.AddUnlikeRequest;
-import com.CultureCup.DTO.Comments.Request.EditCommentRequest;
+import com.CultureCup.DTO.Comments.Request.*;
 import com.CultureCup.DTO.Comments.Response.CommentListItem;
 import com.CultureCup.DTO.MessageResponse;
 import com.CultureCup.Entities.Comment;
@@ -40,6 +37,7 @@ public class CommentService {
 
         Comment comment = Comment.builder()
                 .movieId(addCommentRequest.getMovieId())
+                .gameId(addCommentRequest.getGameId())
                 .username(addCommentRequest.getUsername())
                 .profileImage(user.getProfileImage())
                 .addingDate(Date.valueOf(LocalDate.now()))
@@ -132,8 +130,16 @@ public class CommentService {
         return new MessageResponse("Unlike został dodany");
     }
 
-    public List<CommentListItem> getComments(Long movieId) {
+    public List<CommentListItem> getComments(GetCommentsRequest getCommentsRequest) {
 
-        return CommentAnalysis.findAllByMovieId(commentRepository, movieId);
+        if (getCommentsRequest.getMovieId() != -1) {
+            return CommentAnalysis.findAllByMovieId(commentRepository, getCommentsRequest.getMovieId());
+        }
+        else if (getCommentsRequest.getGameId() != -1) {
+            return CommentAnalysis.findAllByGameId(commentRepository, getCommentsRequest.getGameId());
+        }
+        else {
+            return null;
+        }
     }
 }

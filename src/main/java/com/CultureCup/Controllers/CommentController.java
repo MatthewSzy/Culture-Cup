@@ -1,9 +1,6 @@
 package com.CultureCup.Controllers;
 
-import com.CultureCup.DTO.Comments.Request.AddCommentRequest;
-import com.CultureCup.DTO.Comments.Request.AddLikeRequest;
-import com.CultureCup.DTO.Comments.Request.AddUnlikeRequest;
-import com.CultureCup.DTO.Comments.Request.EditCommentRequest;
+import com.CultureCup.DTO.Comments.Request.*;
 import com.CultureCup.DTO.Comments.Response.CommentListItem;
 import com.CultureCup.DTO.MessageResponse;
 import com.CultureCup.Services.Comment.CommentService;
@@ -62,11 +59,11 @@ public class CommentController {
         return ResponseEntity.ok(messageResponse);
     }
 
-    @GetMapping("get/{id}")
+    @GetMapping("get")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<List<CommentListItem>> getComments(@PathVariable(name = "id") Long movieId) {
+    public ResponseEntity<List<CommentListItem>> getComments(@RequestBody GetCommentsRequest getCommentsRequest) {
 
-        List<CommentListItem> commentListItem = commentService.getComments(movieId);
+        List<CommentListItem> commentListItem = commentService.getComments(getCommentsRequest);
         return ResponseEntity.ok(commentListItem);
     }
 }

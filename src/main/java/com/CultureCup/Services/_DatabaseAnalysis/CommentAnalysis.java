@@ -42,4 +42,20 @@ public class CommentAnalysis {
                 .unlikeNumber(comment.getUnlikeNumber())
                 .build()).collect(Collectors.toList());
     }
+
+    public static List<CommentListItem> findAllByGameId(CommentRepository commentRepository, Long gameId) {
+
+        List<Comment> commentList = commentRepository.findAllByGameId(gameId);
+
+        return commentList.stream().map(comment -> CommentListItem.builder()
+                .commentId(comment.getCommentId())
+                .username(comment.getUsername())
+                .profileImage(comment.getProfileImage())
+                .addingDate(comment.getAddingDate())
+                .addingTime(comment.getAddingTime())
+                .info(comment.getInfo())
+                .likeNumber(comment.getLikeNumber())
+                .unlikeNumber(comment.getUnlikeNumber())
+                .build()).collect(Collectors.toList());
+    }
 }

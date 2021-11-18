@@ -22,6 +22,8 @@ public class Comment {
 
     private Long movieId;
 
+    private Long gameId;
+
     private String username;
 
     private byte[] profileImage;

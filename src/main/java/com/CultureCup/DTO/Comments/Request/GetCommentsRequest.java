@@ -9,15 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AddCommentRequest {
+public class GetCommentsRequest {
 
     private Long movieId;
 
     private Long gameId;
-
-    private Long userId;
-
-    private String username;
-
-    private String info;
 }
