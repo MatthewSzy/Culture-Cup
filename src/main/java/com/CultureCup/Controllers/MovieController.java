@@ -1,10 +1,12 @@
 package com.CultureCup.Controllers;
 
 import com.CultureCup.DTO.Game.GameListItem;
+import com.CultureCup.DTO.MessageResponse;
 import com.CultureCup.DTO.Movie.MovieData;
 import com.CultureCup.DTO.Movie.MovieListItem;
 import com.CultureCup.Services.Movie.MovieService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
