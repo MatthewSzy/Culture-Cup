@@ -17,7 +17,5 @@ public class AddCommentRequest {
 
     private Long userId;
 
-    private String username;
-
     private String info;
 }

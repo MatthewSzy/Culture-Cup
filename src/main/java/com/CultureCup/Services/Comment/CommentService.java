@@ -38,7 +38,7 @@ public class CommentService {
         Comment comment = Comment.builder()
                 .movieId(addCommentRequest.getMovieId())
                 .gameId(addCommentRequest.getGameId())
-                .username(addCommentRequest.getUsername())
+                .username(user.getUsername())
                 .profileImage(user.getProfileImage())
                 .addingDate(Date.valueOf(LocalDate.now()))
                 .addingTime(GetActualTimeClass.getActualTime())
