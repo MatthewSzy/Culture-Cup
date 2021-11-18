@@ -59,7 +59,7 @@ public class CommentController {
         return ResponseEntity.ok(messageResponse);
     }
 
-    @GetMapping("get")
+    @PostMapping("get")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<CommentListItem>> getComments(@RequestBody GetCommentsRequest getCommentsRequest) {
 
