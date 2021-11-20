@@ -1,4 +1,4 @@
-package com.CultureCup.DTO.Comments.Response;
+package com.CultureCup.DTO.Comment.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

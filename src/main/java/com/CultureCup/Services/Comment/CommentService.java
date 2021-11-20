@@ -1,7 +1,7 @@
 package com.CultureCup.Services.Comment;
 
-import com.CultureCup.DTO.Comments.Request.*;
-import com.CultureCup.DTO.Comments.Response.CommentListItem;
+import com.CultureCup.DTO.Comment.Request.*;
+import com.CultureCup.DTO.Comment.Response.CommentListItem;
 import com.CultureCup.DTO.MessageResponse;
 import com.CultureCup.Entities.Comment;
 import com.CultureCup.Entities.User;

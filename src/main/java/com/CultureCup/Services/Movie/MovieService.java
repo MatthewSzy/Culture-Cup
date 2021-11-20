@@ -51,6 +51,28 @@ public class MovieService {
                 .build();
     }
 
+    public List<MovieListItem> getHomePopular() {
+
+        JSONObject jsonObject = new JSONObject(HttpRequestClass.sendRequestToTMDB(getPopularMoviesURL + "1").body());
+        JSONArray jsonArray = new JSONArray(jsonObject.getJSONArray("results"));
+
+        List<MovieListItem> movieListData = new ArrayList<>();
+        for (int i = 0; i < 4; i++) movieListData.add(ObjectCreateClass.createMovieListItem(jsonArray.getJSONObject(i)));
+
+        return movieListData;
+    }
+
+    public List<MovieListItem> getHomeTop() {
+
+        JSONObject jsonObject = new JSONObject(HttpRequestClass.sendRequestToTMDB(getTopMoviesURL + "1").body());
+        JSONArray jsonArray = new JSONArray(jsonObject.getJSONArray("results"));
+
+        List<MovieListItem> movieListData = new ArrayList<>();
+        for (int i = 0; i < 4; i++) movieListData.add(ObjectCreateClass.createMovieListItem(jsonArray.getJSONObject(i)));
+
+        return movieListData;
+    }
+
     public List<MovieListItem> getPopularMovies(Long page) {
 
         JSONObject jsonObject = new JSONObject(HttpRequestClass.sendRequestToTMDB(getPopularMoviesURL + page).body());

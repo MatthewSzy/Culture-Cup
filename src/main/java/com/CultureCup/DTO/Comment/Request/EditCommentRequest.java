@@ -1,4 +1,4 @@
-package com.CultureCup.DTO.Comments.Request;
+package com.CultureCup.DTO.Comment.Request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AddUnlikeRequest {
+public class EditCommentRequest {
 
     private Long commentId;
 
-    private Long userId;
+    private String info;
 }

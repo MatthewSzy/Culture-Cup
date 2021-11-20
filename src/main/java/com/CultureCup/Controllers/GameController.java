@@ -2,6 +2,7 @@ package com.CultureCup.Controllers;
 
 import com.CultureCup.DTO.Game.GameData;
 import com.CultureCup.DTO.Game.GameListItem;
+import com.CultureCup.DTO.Movie.MovieListItem;
 import com.CultureCup.Services.Game.GameService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +25,20 @@ public class GameController {
 
         GameData gameData = gameService.getGame(gameId);
         return ResponseEntity.ok(gameData);
+    }
+
+    @GetMapping("/get/home/popular")
+    public ResponseEntity<List<GameListItem>> getHomePopular() {
+
+        List<GameListItem> gameListItem = gameService.getHomePopular();
+        return ResponseEntity.ok(gameListItem);
+    }
+
+    @GetMapping("/get/home/top")
+    public ResponseEntity<List<GameListItem>> getHomeTop() {
+
+        List<GameListItem> gameListItem = gameService.getHomeTop();
+        return ResponseEntity.ok(gameListItem);
     }
 
     @GetMapping("/get/all/{page}")

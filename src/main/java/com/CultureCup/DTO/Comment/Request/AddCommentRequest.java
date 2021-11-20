@@ -1,4 +1,4 @@
-package com.CultureCup.DTO.Comments.Request;
+package com.CultureCup.DTO.Comment.Request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AddLikeRequest {
+public class AddCommentRequest {
 
-    private Long commentId;
+    private Long movieId;
+
+    private Long gameId;
 
     private Long userId;
+
+    private String info;
 }

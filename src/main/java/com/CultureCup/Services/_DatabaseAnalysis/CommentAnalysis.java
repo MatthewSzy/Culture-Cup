@@ -1,13 +1,12 @@
 package com.CultureCup.Services._DatabaseAnalysis;
 
-import com.CultureCup.DTO.Comments.Response.CommentListItem;
+import com.CultureCup.DTO.Comment.Response.CommentListItem;
 import com.CultureCup.Entities.Comment;
 import com.CultureCup.Exceptions.CommentNotFoundException;
 import com.CultureCup.Repositories.CommentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

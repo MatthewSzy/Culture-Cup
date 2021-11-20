@@ -1,7 +1,7 @@
 package com.CultureCup.Controllers;
 
-import com.CultureCup.DTO.Comments.Request.*;
-import com.CultureCup.DTO.Comments.Response.CommentListItem;
+import com.CultureCup.DTO.Comment.Request.*;
+import com.CultureCup.DTO.Comment.Response.CommentListItem;
 import com.CultureCup.DTO.MessageResponse;
 import com.CultureCup.Services.Comment.CommentService;
 import org.springframework.http.ResponseEntity;

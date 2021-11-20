@@ -27,6 +27,20 @@ public class MovieController {
         return ResponseEntity.ok(movieData);
     }
 
+    @GetMapping("/get/home/popular")
+    public ResponseEntity<List<MovieListItem>> getHomePopular() {
+
+        List<MovieListItem> movieListItem = movieService.getHomePopular();
+        return ResponseEntity.ok(movieListItem);
+    }
+
+    @GetMapping("/get/home/top")
+    public ResponseEntity<List<MovieListItem>> getHomeTop() {
+
+        List<MovieListItem> movieListItem = movieService.getHomeTop();
+        return ResponseEntity.ok(movieListItem);
+    }
+
     @GetMapping("/get/all/{page}")
     public ResponseEntity<List<MovieListItem>> getAllMovies(@PathVariable(name = "page") Long page) {
 
