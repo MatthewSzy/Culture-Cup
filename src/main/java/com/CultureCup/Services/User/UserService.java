@@ -43,7 +43,7 @@ public class UserService {
     public static final String getMovieSecondPartURL = "?api_key=6728e1ab041b59d1f357590bff4384f5&language=pl-PL";
     public static final String getGameFirstPartURL = "https://api.igdb.com/v4/games/";
 
-    public String accessToken = "fgkdv5nm5d8d7dga2z2ed3p4zcdltn";
+    public String accessToken = "gz090xcfywhqbn1pxclm4474gwib5d";
 
     @Autowired
     UserRepository userRepository;
@@ -192,6 +192,11 @@ public class UserService {
         userRepository.save(user);
         logger.info("The admin role for the user has been removed for: " + user.getUsername());
         return new MessageResponse("Rola admina dla użytkownika została usunięta");
+    }
+
+    public Long findUserByUsername(String username) {
+
+        return userRepository.findUserByUsername(username).get().getUserId();
     }
 
     public MessageResponse userAddMovieToWatch(AddMovieToWatchData addMovieToWatchData) {

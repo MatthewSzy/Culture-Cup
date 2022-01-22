@@ -94,6 +94,14 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/find/{username}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<Long> findUserbyUsername(@PathVariable(name = "username") String username) {
+
+        Long response = userService.findUserByUsername(username);
+        return ResponseEntity.ok(response);
+    }
+
     @PutMapping("/add/toWatch")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<MessageResponse> userAddMovieToWatch(@RequestBody AddMovieToWatchData addMovieToWatchData) {
