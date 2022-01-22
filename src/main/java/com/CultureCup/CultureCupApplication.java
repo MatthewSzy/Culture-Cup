@@ -19,6 +19,7 @@ public class CultureCupApplication {
 		SpringApplication.run(CultureCupApplication.class, args);
 	}
 
+	/*
 	@Bean
 	InitializingBean addRolesToDatabase() {
 		return () -> {
@@ -26,4 +27,6 @@ public class CultureCupApplication {
 			roleRepository.save(Role.builder().name(RoleEnum.ROLE_ADMIN).build());
 		};
 	}
+
+	 */
 }
