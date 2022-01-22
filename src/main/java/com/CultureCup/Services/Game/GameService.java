@@ -23,7 +23,7 @@ public class GameService {
     public static final String getGameFirstPartURL = "https://api.igdb.com/v4/games/";
     public static final String getGameSecondPartURL = "?&fields=age_ratings.rating,category,cover.url,expansions.id,franchises.name,game_engines.name,game_modes.name,genres.name,name,player_perspectives.name,platforms.name,release_dates.*,status,screenshots.url,storyline,summary,themes.name,total_rating,total_rating_count";
 
-    public String accessToken = "fgkdv5nm5d8d7dga2z2ed3p4zcdltn";
+    public String accessToken = "gz090xcfywhqbn1pxclm4474gwib5d";
 
     public GameData getGame(Long gameId) {
 
