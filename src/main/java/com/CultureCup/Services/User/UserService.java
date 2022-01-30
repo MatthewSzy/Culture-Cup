@@ -267,6 +267,8 @@ public class UserService {
 
         User user = UserAnalysis.findUserByUserId(userRepository, addRatingToMovie.getUserId());
 
+        user.getMoviesWatched().remove(addRatingToMovie.getMovieId());
+        user.getFavoriteMovies().remove(addRatingToMovie.getMovieId());
         user.getMoviesWatched().put(addRatingToMovie.getMovieId(), addRatingToMovie.getMovieRating());
         user.getFavoriteMovies().put(addRatingToMovie.getMovieId(), addRatingToMovie.getMovieRating());
 
@@ -404,6 +406,8 @@ public class UserService {
 
         User user = UserAnalysis.findUserByUserId(userRepository, addRatingToGame.getUserId());
 
+        user.getGamesPlayed().remove(addRatingToGame.getGameId());
+        user.getFavoriteGames().remove(addRatingToGame.getGameId());
         user.getGamesPlayed().put(addRatingToGame.getGameId(), addRatingToGame.getGameRating());
         user.getFavoriteGames().put(addRatingToGame.getGameId(), addRatingToGame.getGameRating());
 
