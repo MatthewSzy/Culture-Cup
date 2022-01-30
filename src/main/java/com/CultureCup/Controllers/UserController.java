@@ -158,7 +158,7 @@ public class UserController {
         return ResponseEntity.ok(movieListItem);
     }
 
-    @GetMapping("/get/movieRating")
+    @PostMapping("/get/movieRating")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Integer> userGetMovieRating(@RequestBody CheckUserMoviesInfoData checkUserMoviesInfoData) {
 
@@ -230,7 +230,7 @@ public class UserController {
         return ResponseEntity.ok(gameListItem);
     }
 
-    @GetMapping("/get/gameRating")
+    @PostMapping("/get/gameRating")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<Integer> userGetGameRating(@RequestBody CheckUserGamesInfoData checkUserGamesInfoData) {
 
