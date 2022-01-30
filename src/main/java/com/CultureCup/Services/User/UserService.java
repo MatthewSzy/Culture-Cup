@@ -272,6 +272,8 @@ public class UserService {
         user.getMoviesWatched().put(addRatingToMovie.getMovieId(), addRatingToMovie.getMovieRating());
         user.getFavoriteMovies().put(addRatingToMovie.getMovieId(), addRatingToMovie.getMovieRating());
 
+        userRepository.save(user);
+
         return new MessageResponse("Film został oceniony!");
     }
 
@@ -319,6 +321,7 @@ public class UserService {
         User user = UserAnalysis.findUserByUserId(userRepository, checkUserMoviesInfoData.getUserId());
         Integer rating = 0;
         if (user.getMoviesWatched().containsKey(checkUserMoviesInfoData.getMovieId())) {
+            System.out.println(user.getMoviesWatched().get(checkUserMoviesInfoData.getMovieId()).intValue());
             rating = user.getMoviesWatched().get(checkUserMoviesInfoData.getMovieId()).intValue();
         }
 
@@ -410,6 +413,8 @@ public class UserService {
         user.getFavoriteGames().remove(addRatingToGame.getGameId());
         user.getGamesPlayed().put(addRatingToGame.getGameId(), addRatingToGame.getGameRating());
         user.getFavoriteGames().put(addRatingToGame.getGameId(), addRatingToGame.getGameRating());
+
+        userRepository.save(user);
 
         return new MessageResponse("Gra została oceniona!");
     }
