@@ -263,6 +263,16 @@ public class UserService {
         return new MessageResponse("Film został dodany do listy \"ULUBIONE\".");
     }
 
+    public MessageResponse userAddRatingToMovie(AddRatingToMovie addRatingToMovie) {
+
+        User user = UserAnalysis.findUserByUserId(userRepository, addRatingToMovie.getUserId());
+
+        user.getMoviesWatched().put(addRatingToMovie.getMovieId(), addRatingToMovie.getMovieRating());
+        user.getFavoriteMovies().put(addRatingToMovie.getMovieId(), addRatingToMovie.getMovieRating());
+
+        return new MessageResponse("Film został oceniony!");
+    }
+
     public List<MovieListItem> userGetToWatchMovies(Long userId) {
 
         User user = UserAnalysis.findUserByUserId(userRepository, userId);
@@ -300,6 +310,17 @@ public class UserService {
         });
 
         return movieListItem;
+    }
+
+    public Integer userGetMovieRating(CheckUserMoviesInfoData checkUserMoviesInfoData) {
+
+        User user = UserAnalysis.findUserByUserId(userRepository, checkUserMoviesInfoData.getUserId());
+        Integer rating = 0;
+        if (user.getMoviesWatched().containsKey(checkUserMoviesInfoData.getMovieId())) {
+            rating = user.getMoviesWatched().get(checkUserMoviesInfoData.getMovieId()).intValue();
+        }
+
+        return rating;
     }
 
     public List<Boolean> userGetMoviesInfo(CheckUserMoviesInfoData checkUserMoviesInfoData) {
@@ -379,6 +400,16 @@ public class UserService {
         return new MessageResponse("Film został dodany do listy \"ULUBIONE\".");
     }
 
+    public MessageResponse userAddRatingToGame(AddRatingToGame addRatingToGame) {
+
+        User user = UserAnalysis.findUserByUserId(userRepository, addRatingToGame.getUserId());
+
+        user.getGamesPlayed().put(addRatingToGame.getGameId(), addRatingToGame.getGameRating());
+        user.getFavoriteGames().put(addRatingToGame.getGameId(), addRatingToGame.getGameRating());
+
+        return new MessageResponse("Gra została oceniona!");
+    }
+
     public List<GameListItem> userGetToPlayGames(Long userId) {
 
         User user = UserAnalysis.findUserByUserId(userRepository, userId);
@@ -416,6 +447,18 @@ public class UserService {
         });
 
         return gameListItem;
+    }
+
+    public Integer userGetGameRating(CheckUserGamesInfoData checkUserGamesInfoData) {
+
+        User user = UserAnalysis.findUserByUserId(userRepository, checkUserGamesInfoData.getUserId());
+
+        Integer rating = 0;
+        if (user.getGamesPlayed().containsKey(checkUserGamesInfoData.getGameId())) {
+            rating = user.getGamesPlayed().get(checkUserGamesInfoData.getGameId()).intValue();
+        }
+
+        return rating;
     }
 
     public List<Boolean> userGetGamesInfo(CheckUserGamesInfoData checkUserGamesInfoData) {

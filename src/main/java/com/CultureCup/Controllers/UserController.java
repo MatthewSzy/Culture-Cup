@@ -126,6 +126,14 @@ public class UserController {
         return ResponseEntity.ok(messageResponse);
     }
 
+    @PutMapping("/add/movieRating")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<MessageResponse> userAddRatingToMovie(@RequestBody AddRatingToMovie addRatingToMovie) {
+
+        MessageResponse messageResponse = userService.userAddRatingToMovie(addRatingToMovie);
+        return ResponseEntity.ok(messageResponse);
+    }
+
     @GetMapping("/get/toWatch/{id}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<MovieListItem>> userGetToWatchMovies(@PathVariable(name = "id") Long userId) {
@@ -148,6 +156,14 @@ public class UserController {
 
         List<MovieListItem> movieListItem = userService.userGetFavoriteMovies(userId);
         return ResponseEntity.ok(movieListItem);
+    }
+
+    @GetMapping("/get/movieRating")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<Integer> userGetMovieRating(@RequestBody CheckUserMoviesInfoData checkUserMoviesInfoData) {
+
+        Integer response = userService.userGetMovieRating(checkUserMoviesInfoData);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/get/movieInfo")
@@ -182,6 +198,14 @@ public class UserController {
         return ResponseEntity.ok(messageResponse);
     }
 
+    @PutMapping("/add/gameRating")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<MessageResponse> userAddRatingToGame(@RequestBody AddRatingToGame addRatingToGame) {
+
+        MessageResponse messageResponse = userService.userAddRatingToGame(addRatingToGame);
+        return ResponseEntity.ok(messageResponse);
+    }
+
     @GetMapping("/get/toPlay/{id}")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<GameListItem>> userGetToPlayGames(@PathVariable(name = "id") Long userId) {
@@ -204,6 +228,14 @@ public class UserController {
 
         List<GameListItem> gameListItem = userService.userGetFavoriteGames(userId);
         return ResponseEntity.ok(gameListItem);
+    }
+
+    @GetMapping("/get/gameRating")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<Integer> userGetGameRating(@RequestBody CheckUserGamesInfoData checkUserGamesInfoData) {
+
+        Integer response = userService.userGetGameRating(checkUserGamesInfoData);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/get/gameInfo")
